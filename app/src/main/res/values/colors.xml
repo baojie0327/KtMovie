@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="rating">#ffd54f</color>
     <color name="main_color">#00BD30</color>
     <color name="icon_color">#8C8C8C</color>
     <color name="background_gray_color">#f7f7f7</color>
