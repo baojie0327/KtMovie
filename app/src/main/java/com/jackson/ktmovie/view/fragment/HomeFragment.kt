@@ -10,15 +10,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.jackson.ktmovie.R
-import com.jackson.ktmovie.adapter.InTheatersAdapter
-import com.jackson.ktmovie.bean.InTheatersBean
-import com.jackson.ktmovie.dagger.component.DaggerInTheatersComponent
-import com.jackson.ktmovie.dagger.module.InTheatersModule
-import com.jackson.ktmovie.presenter.InTheatersPresenter
-import com.jackson.ktmovie.view.IView
-import io.reactivex.disposables.Disposable
 import org.jetbrains.anko.find
-import javax.inject.Inject
 
 /**
  * HomeFragment  2018-06-19
@@ -30,23 +22,20 @@ import javax.inject.Inject
  * @version 1.0.0
  * since 2018 06 19
  */
-class HomeFragment : Fragment(), IView.IInTheatersView {
+class HomeFragment : Fragment() {
 
     private var rootView: View? = null
     private lateinit var llBack: LinearLayout  // 返回键，需要隐藏
     private lateinit var tvTitle: TextView   // title
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mInTheatersAdapter:InTheatersAdapter
 
-    @Inject
-    lateinit var mInTheatersPresenter: InTheatersPresenter
+
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (rootView == null) {
             rootView = inflater!!.inflate(R.layout.fragment_home_layout, null)
-            inject()
             initView()
-            mInTheatersPresenter.getData()  // 获取数据
+
 
         }
         return rootView
@@ -68,21 +57,12 @@ class HomeFragment : Fragment(), IView.IInTheatersView {
         mRecyclerView.layoutManager = layoutManger
     }
 
-    /**
-     * 完成mInTheatersPresenter的注入
-     */
-    private fun inject() = DaggerInTheatersComponent.builder()
-            .inTheatersModule(InTheatersModule(this))
-            .build()
-            .inject(this)
 
 
-    override fun setData(dataList: MutableList<InTheatersBean.SubjectsBean>) {
-       mInTheatersAdapter=InTheatersAdapter(R.layout.item_intheaters_layout,dataList)
-        mRecyclerView.adapter=mInTheatersAdapter
-    }
 
-    override fun closeDisposable(disposable: Disposable) = Unit
+
+
+
 
 
     /**

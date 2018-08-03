@@ -1,6 +1,6 @@
 package com.jackson.ktmovie.view
 
-import com.jackson.ktmovie.bean.InTheatersBean
+import com.jackson.ktmovie.bean.HotShowBean
 import io.reactivex.disposables.Disposable
 
 /**
@@ -15,8 +15,11 @@ import io.reactivex.disposables.Disposable
  */
 class IView {
 
-    interface IInTheatersView{
-        fun setData(dataList:MutableList<InTheatersBean.SubjectsBean>) // 设置数据
+    /**
+     * 热映
+     */
+    interface IHotShowView{
+        fun setData(dataList:MutableList<HotShowBean.SubjectsBean>) // 设置数据
         fun closeDisposable(disposable:Disposable)
     }
 }

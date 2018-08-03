@@ -1,6 +1,6 @@
 package com.jackson.ktmovie.apiservice
 
-import com.jackson.ktmovie.bean.InTheatersBean
+import com.jackson.ktmovie.bean.HotShowBean
 import com.jackson.ktmovie.utils.Constant
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -18,7 +18,7 @@ import retrofit2.http.QueryMap
  */
 class JsNetworkService private constructor(retrofitClient: RetrofitClient) {
 
-     var mINetworkService: INetworkService
+    var mINetworkService: INetworkService
 
     init {
         mINetworkService = retrofitClient.create(JsNetworkService.INetworkService::class.java)
@@ -36,9 +36,11 @@ class JsNetworkService private constructor(retrofitClient: RetrofitClient) {
      * 网络请求服务接口
      */
     interface INetworkService {
-
+        /**
+         * 热映
+         */
         @GET("v2/movie/in_theaters")
-        fun getInTheatersData(@QueryMap parmMap:Map<String,String>):Observable<InTheatersBean>
+        fun getHotShowData(@QueryMap parmMap: Map<String, String>): Observable<HotShowBean>
 
 
     }

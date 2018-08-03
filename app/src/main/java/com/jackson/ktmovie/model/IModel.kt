@@ -1,7 +1,7 @@
 package com.jackson.ktmovie.model
 
 import com.jackson.ktmovie.apiservice.MyCallBack
-import com.jackson.ktmovie.bean.InTheatersBean
+import com.jackson.ktmovie.bean.HotShowBean
 import retrofit2.http.QueryMap
 
 /**
@@ -17,11 +17,12 @@ import retrofit2.http.QueryMap
 class IModel {
 
     /**
-     * 正在上映
+     * 热映
      */
-    interface IInTheatersModel {
-        fun getData(@QueryMap paraMap: MutableMap<String, String>, callBack: MyCallBack<InTheatersBean>)
+    interface IHotShowModel {
+        fun getData(@QueryMap paraMap: MutableMap<String, String>, callBack: MyCallBack<HotShowBean>)
     }
+
 
 
 }

@@ -12,6 +12,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.ashokvarma.bottomnavigation.ShapeBadgeItem
 import com.ashokvarma.bottomnavigation.TextBadgeItem
 import com.jackson.ktmovie.view.fragment.HomeFragment
+import com.jackson.ktmovie.view.fragment.HotShowFragment
 import com.jackson.ktmovie.view.fragment.MineFragment
 import com.jackson.ktmovie.view.fragment.RankListFragment
 import org.jetbrains.anko.find
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, BottomNavigation
 
     // 三个Fragment
     private var mHomeFragment: HomeFragment? = null
+    private var mHotShowFragment: HotShowFragment? = null
     private var mRankListFragment: RankListFragment? = null
     private var mMineFragment: MineFragment? = null
 
@@ -78,6 +80,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, BottomNavigation
                 .setHideOnSelect(false)
 
         mBottomNavigationBar.addItem(BottomNavigationItem(R.mipmap.tab_home_pressed, "首页").setActiveColorResource(R.color.main_color).setInactiveIconResource(R.mipmap.tab_home_normal).setInActiveColorResource(R.color.icon_color))
+                .addItem(BottomNavigationItem(R.mipmap.tab_hotshow, "热映").setActiveColorResource(R.color.main_color).setInactiveIconResource(R.mipmap.tab_hotshow_off).setInActiveColorResource(R.color.icon_color))
                 .addItem(BottomNavigationItem(R.mipmap.tab_ranklist_check, "排行").setActiveColorResource(R.color.main_color).setInactiveIconResource(R.mipmap.tab_ranklist_normal).setInActiveColorResource(R.color.icon_color).setBadgeItem(mShapeBadgeItem))
                 .addItem(BottomNavigationItem(R.mipmap.tab_mine_pressed, "我的").setActiveColorResource(R.color.main_color).setInactiveIconResource(R.mipmap.tab_mine_normal).setInActiveColorResource(R.color.icon_color).setBadgeItem(mTextBadgeItem))
                 .setFirstSelectedPosition(lastSelectedPosition)
@@ -125,14 +128,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, BottomNavigation
                 mTransaction.show(mHomeFragment)
             }
 
-            1 -> if (mRankListFragment == null) {
+            1 -> if (mHotShowFragment == null) {
+                mHotShowFragment = HotShowFragment.newInstance()
+                mTransaction.add(R.id.ll_content, mHotShowFragment)
+            } else {
+                mTransaction.show(mHotShowFragment)
+            }
+
+            2 -> if (mRankListFragment == null) {
                 mRankListFragment = RankListFragment.newInstance()
                 mTransaction.add(R.id.ll_content, mRankListFragment)
             } else {
                 mTransaction.show(mRankListFragment)
             }
 
-            2 -> if (mMineFragment == null) {
+            3 -> if (mMineFragment == null) {
                 mMineFragment = MineFragment.newInstance()
                 mTransaction.add(R.id.ll_content, mMineFragment)
             } else {
@@ -155,6 +165,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, BottomNavigation
     private fun hideFragment(transaction: FragmentTransaction) {
         if (mHomeFragment != null) {
             transaction.hide(mHomeFragment)
+        }
+
+        if (mHotShowFragment != null) {
+            transaction.hide(mHotShowFragment)
         }
 
         if (mRankListFragment != null) {

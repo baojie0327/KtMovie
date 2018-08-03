@@ -3,25 +3,24 @@ package com.jackson.ktmovie.adapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.jackson.ktmovie.R
-
-import com.jackson.ktmovie.bean.InTheatersBean
+import com.jackson.ktmovie.bean.HotShowBean
 import com.jackson.ktmovie.utils.glide.GlideUtils
 import java.text.DecimalFormat
 
 /**
- * InTheatersAdapter  2018-07-03
+ * HotShowAdapter  2018-07-03
  * Copyright (c) 2018 JS Co.Ltd. All right reserved.
  */
 /**
- * class description here
+ * 热映Adapter
  * @author Jackson
  * @version 1.0.0
  * since 2018 07 03
  */
-class InTheatersAdapter(layoutResId: Int, data: MutableList<InTheatersBean.SubjectsBean>?) : BaseQuickAdapter<InTheatersBean.SubjectsBean, BaseViewHolder>(layoutResId, data) {
+class HotShowAdapter(layoutResId: Int, data: MutableList<HotShowBean.SubjectsBean>?) : BaseQuickAdapter<HotShowBean.SubjectsBean, BaseViewHolder>(layoutResId, data) {
 
 
-    override fun convert(helper: BaseViewHolder?, item: InTheatersBean.SubjectsBean?) {
+    override fun convert(helper: BaseViewHolder?, item: HotShowBean.SubjectsBean?) {
 
         // 加载图片
         GlideUtils.loadUrlImage(mContext, item!!.images!!.medium, helper!!.getView(R.id.img_moive))
@@ -46,7 +45,7 @@ class InTheatersAdapter(layoutResId: Int, data: MutableList<InTheatersBean.Subje
     /**
      * 获取主演
      */
-    private fun getActor(acList: List<InTheatersBean.SubjectsBean.Cast>): String {
+    private fun getActor(acList: List<HotShowBean.SubjectsBean.Cast>): String {
         var strBuilder = StringBuilder()
         acList.forEach {
             strBuilder.append(it.name + " / ")

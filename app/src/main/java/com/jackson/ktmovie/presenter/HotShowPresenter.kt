@@ -1,9 +1,9 @@
 package com.jackson.ktmovie.presenter
 
 import com.jackson.ktmovie.apiservice.MyCallBack
-import com.jackson.ktmovie.bean.InTheatersBean
-import com.jackson.ktmovie.dagger.component.DaggerInTheatersComponent
-import com.jackson.ktmovie.dagger.module.InTheatersModule
+import com.jackson.ktmovie.bean.HotShowBean
+import com.jackson.ktmovie.dagger.component.DaggerHotShowComponent
+import com.jackson.ktmovie.dagger.module.HotShowModule
 import com.jackson.ktmovie.model.IModel
 import com.jackson.ktmovie.view.IView
 import io.reactivex.disposables.Disposable
@@ -19,18 +19,18 @@ import javax.inject.Inject
  * @version 1.0.0
  * since 2018 07 02
  */
-class InTheatersPresenter(iInTheatersView: IView.IInTheatersView) {
+class HotShowPresenter(iIHotShowView: IView.IHotShowView) {
 
-    private var mIInTheatersView: IView.IInTheatersView? = null
+    private var mIHotShowView: IView.IHotShowView? = null
 
     @Inject
-     lateinit var mInTheatersModel:IModel.IInTheatersModel
+     lateinit var mIHotShowModel:IModel.IHotShowModel
 
     /**
      * 初始化
      */
     init {
-        mIInTheatersView = iInTheatersView
+        mIHotShowView = iIHotShowView
         inject()
     }
 
@@ -46,18 +46,18 @@ class InTheatersPresenter(iInTheatersView: IView.IInTheatersView) {
         val parmMap:MutableMap<String,String> = mutableMapOf()
         parmMap.put("city", "北京")
 
-        mInTheatersModel!!.getData(parmMap, object : MyCallBack<InTheatersBean> {
+        mIHotShowModel!!.getData(parmMap, object : MyCallBack<HotShowBean> {
            // 成功回调
-            override fun onSuccess(response: InTheatersBean) {
+            override fun onSuccess(response: HotShowBean) {
                 if (response.code.isEmpty()) {
-                    mIInTheatersView!!.setData(response.subjects!!)
+                    mIHotShowView!!.setData(response.subjects!!)
                 }
             }
 
             override fun onError(header: String, message: String) = Unit
 
             override fun onDispose(disposable: Disposable) =
-                    mIInTheatersView!!.closeDisposable(disposable)
+                    mIHotShowView!!.closeDisposable(disposable)
 
         })
     }
@@ -66,8 +66,8 @@ class InTheatersPresenter(iInTheatersView: IView.IInTheatersView) {
      * 完成mInTheatersModel的注入操作
      */
     private fun inject()=
-        DaggerInTheatersComponent.builder()
-                .inTheatersModule(InTheatersModule())
+        DaggerHotShowComponent.builder()
+                .hotShowModule(HotShowModule())
                 .build()
                 .inject(this)
 

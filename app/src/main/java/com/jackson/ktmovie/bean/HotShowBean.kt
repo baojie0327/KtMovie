@@ -10,7 +10,7 @@ package com.jackson.ktmovie.bean
  * @version 1.0.0
  * since 2018 07 02
  */
-class InTheatersBean : BaseBean<InTheatersBean.SubjectsBean>() {
+class HotShowBean : BaseBean<HotShowBean.SubjectsBean>() {
 
 
     class SubjectsBean : BasicBean() {

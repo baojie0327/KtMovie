@@ -1,8 +1,8 @@
 package com.jackson.ktmovie.dagger.module
 
+import com.jackson.ktmovie.model.HotShowModel
 import com.jackson.ktmovie.model.IModel
-import com.jackson.ktmovie.model.InTheatersModel
-import com.jackson.ktmovie.presenter.InTheatersPresenter
+import com.jackson.ktmovie.presenter.HotShowPresenter
 import com.jackson.ktmovie.view.IView
 import dagger.Module
 import dagger.Provides
@@ -19,9 +19,9 @@ import javax.inject.Singleton
  * since 2018 07 02
  */
 @Module
-class InTheatersModule {
+class HotShowModule {
 
-    private lateinit var inTheatersView: IView.IInTheatersView
+    private lateinit var hotShowView: IView.IHotShowView
 
     /**
      * 空的构造方法，在presenter使用
@@ -33,8 +33,8 @@ class InTheatersModule {
     /**
      * 在Fragment使用
      */
-    constructor(view: IView.IInTheatersView) {
-        this.inTheatersView = view
+    constructor(view: IView.IHotShowView) {
+        this.hotShowView = view
     }
 
 
@@ -43,16 +43,16 @@ class InTheatersModule {
      */
     @Provides
     @Singleton
-    fun provideInTheatersPresenter(iIInTheatersView: IView.IInTheatersView): InTheatersPresenter =
-            InTheatersPresenter(iIInTheatersView)
+    fun provideInTheatersPresenter(iIHotShowView: IView.IHotShowView): HotShowPresenter =
+            HotShowPresenter(iIHotShowView)
 
     /**
      * 提供InTheatersModel，正在上映
      */
     @Provides
     @Singleton
-    fun provideInTheatersModel(): IModel.IInTheatersModel =
-            InTheatersModel()
+    fun provideInTheatersModel(): IModel.IHotShowModel =
+            HotShowModel()
 
 
     /**
@@ -60,8 +60,8 @@ class InTheatersModule {
      */
     @Provides
     @Singleton
-    fun provideIInTheatersView(): IView.IInTheatersView =
-            inTheatersView
+    fun provideIInTheatersView(): IView.IHotShowView =
+            hotShowView
 
 
 }

@@ -2,7 +2,7 @@ package com.jackson.ktmovie.model
 
 import com.jackson.ktmovie.apiservice.JsNetworkService
 import com.jackson.ktmovie.apiservice.MyCallBack
-import com.jackson.ktmovie.bean.InTheatersBean
+import com.jackson.ktmovie.bean.HotShowBean
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -18,14 +18,14 @@ import io.reactivex.schedulers.Schedulers
  * @version 1.0.0
  * since 2018 07 02
  */
-class InTheatersModel : IModel.IInTheatersModel {
+class HotShowModel : IModel.IHotShowModel {
 
-    override fun getData(paraMap: MutableMap<String, String>, callBack: MyCallBack<InTheatersBean>) =
+    override fun getData(paraMap: MutableMap<String, String>, callBack: MyCallBack<HotShowBean>) =
             JsNetworkService.instance.mINetworkService
-                    .getInTheatersData(paraMap)
+                    .getHotShowData(paraMap)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : Observer<InTheatersBean> {
+                    .subscribe(object : Observer<HotShowBean> {
                         /**
                          * 失败
                          */
@@ -46,7 +46,7 @@ class InTheatersModel : IModel.IInTheatersModel {
                         /**
                          * 处理中
                          */
-                        override fun onNext(t: InTheatersBean) =
+                        override fun onNext(t: HotShowBean) =
                                 callBack.onSuccess(t)
 
                     })
