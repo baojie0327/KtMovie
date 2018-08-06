@@ -5,6 +5,7 @@ import com.jackson.ktmovie.bean.HotShowBean
 import com.jackson.ktmovie.dagger.component.DaggerHotShowComponent
 import com.jackson.ktmovie.dagger.module.HotShowModule
 import com.jackson.ktmovie.model.IModel
+import com.jackson.ktmovie.utils.Constant
 import com.jackson.ktmovie.view.IView
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -24,7 +25,7 @@ class HotShowPresenter(iIHotShowView: IView.IHotShowView) {
     private var mIHotShowView: IView.IHotShowView? = null
 
     @Inject
-     lateinit var mIHotShowModel:IModel.IHotShowModel
+    lateinit var mIHotShowModel: IModel.IHotShowModel
 
     /**
      * 初始化
@@ -35,22 +36,29 @@ class HotShowPresenter(iIHotShowView: IView.IHotShowView) {
     }
 
     /**
-     * 获取数据
+     *
      */
-    fun getData() {
-       /* var city: String = ""
-        try {
-            city = URLEncoder.encode("北京", "utf-8")
-        } catch (e: Exception) {
-        }*/
-        val parmMap:MutableMap<String,String> = mutableMapOf()
-        parmMap.put("city", "北京")
+    fun getData(type: Int, start: Int) {
+        /* var city: String = ""
+         try {
+             city = URLEncoder.encode("北京", "utf-8")
+         } catch (e: Exception) {
+         }*/
+        val paraMap: MutableMap<String, String> = mutableMapOf()
+        paraMap.put("city", "北京")
+        paraMap.put("start", start.toString())
+        paraMap.put("count", Constant.PAGE_COUNT.toString())
 
-        mIHotShowModel!!.getData(parmMap, object : MyCallBack<HotShowBean> {
-           // 成功回调
+        mIHotShowModel!!.getData(paraMap, object : MyCallBack<HotShowBean> {
+            // 成功回调
             override fun onSuccess(response: HotShowBean) {
                 if (response.code.isEmpty()) {
-                    mIHotShowView!!.setData(response.subjects!!)
+                    when (type) {
+                        0 -> mIHotShowView!!.setData(response.subjects!!)
+                        1 -> mIHotShowView!!.onRefresh(response.subjects!!)
+                        2 -> mIHotShowView!!.onLoadMore(response.subjects!!)
+                    }
+
                 }
             }
 
@@ -65,13 +73,11 @@ class HotShowPresenter(iIHotShowView: IView.IHotShowView) {
     /**
      * 完成mInTheatersModel的注入操作
      */
-    private fun inject()=
-        DaggerHotShowComponent.builder()
-                .hotShowModule(HotShowModule())
-                .build()
-                .inject(this)
-
-
+    private fun inject() =
+            DaggerHotShowComponent.builder()
+                    .hotShowModule(HotShowModule())
+                    .build()
+                    .inject(this)
 
 
 }

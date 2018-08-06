@@ -2,9 +2,9 @@ package com.jackson.ktmovie.dagger.module
 
 import com.jackson.ktmovie.apiservice.JsNetworkService
 import com.jackson.ktmovie.apiservice.RetrofitClient
-import com.jackson.ktmovie.model.HotShowModel
+import com.jackson.ktmovie.model.HomeModel
 import com.jackson.ktmovie.model.IModel
-import com.jackson.ktmovie.presenter.HotShowPresenter
+import com.jackson.ktmovie.presenter.HomePresenter
 import com.jackson.ktmovie.utils.Constant
 import com.jackson.ktmovie.view.IView
 import dagger.Module
@@ -22,9 +22,9 @@ import javax.inject.Singleton
  * since 2018 07 02
  */
 @Module
-class HotShowModule {
+class HomeModule {
 
-    private lateinit var hotShowView: IView.IHotShowView
+    private lateinit var homeView: IView.IHomeView
 
     /**
      * 空的构造方法，在presenter使用
@@ -36,8 +36,8 @@ class HotShowModule {
     /**
      * 在Fragment使用
      */
-    constructor(view: IView.IHotShowView) {
-        this.hotShowView = view
+    constructor(view: IView.IHomeView) {
+        this.homeView = view
     }
 
 
@@ -46,16 +46,16 @@ class HotShowModule {
      */
     @Provides
     @Singleton
-    fun provideHotShowPresenter(iIHotShowView: IView.IHotShowView): HotShowPresenter =
-            HotShowPresenter(iIHotShowView)
+    fun provideInTheatersPresenter(iIHomeView: IView.IHomeView): HomePresenter =
+            HomePresenter(iIHomeView)
 
     /**
-     * 提供HotShowModel
+     * IHomeModel
      */
     @Provides
     @Singleton
-    fun provideHotShowModel(mJsNetworkService: JsNetworkService): IModel.IHotShowModel =
-            HotShowModel(mJsNetworkService)
+    fun provideHomeModel(mJsNetworkService: JsNetworkService): IModel.IHomeModel =
+            HomeModel(mJsNetworkService)
 
 
     /**
@@ -72,15 +72,16 @@ class HotShowModule {
     @Provides
     @Singleton
     fun provideRetrofitClient() =
-            RetrofitClient(Constant.baseUrl)
+            RetrofitClient(Constant.baseUrlJD)
+
 
     /**
-     * IHotShowView
+     * 提供IInTheatersView，正在上映
      */
     @Provides
     @Singleton
-    fun provideIHotShowView(): IView.IHotShowView =
-            hotShowView
+    fun provideIHomeView(): IView.IHomeView =
+            homeView
 
 
 }

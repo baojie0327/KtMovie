@@ -15,11 +15,10 @@ import com.jackson.ktmovie.bean.HotShowBean
 import com.jackson.ktmovie.dagger.component.DaggerHotShowComponent
 import com.jackson.ktmovie.dagger.module.HotShowModule
 import com.jackson.ktmovie.presenter.HotShowPresenter
+import com.jackson.ktmovie.utils.Constant
 import com.jackson.ktmovie.view.IView
 import com.scwang.smartrefresh.header.MaterialHeader
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.scwang.smartrefresh.layout.api.RefreshLayout
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import io.reactivex.disposables.Disposable
 import org.jetbrains.anko.find
 import javax.inject.Inject
@@ -42,6 +41,8 @@ class HotShowFragment : Fragment(), IView.IHotShowView {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mHotShowAdapter: HotShowAdapter
     private lateinit var mRefreshLayout: SmartRefreshLayout
+    private var type: Int = 0  // 类型，0--刚进入 1--刷新 2--加载
+    private var start: Int = 0  // 起始刷新位置
 
     @Inject
     lateinit var mHotShowPresenter: HotShowPresenter
@@ -51,7 +52,8 @@ class HotShowFragment : Fragment(), IView.IHotShowView {
             rootView = inflater!!.inflate(R.layout.fragment_hotshow_layout, null)
             inject()
             initView()
-            mHotShowPresenter.getData()  // 获取数据
+            mHotShowPresenter.getData(type, start)  // 获取数据
+            refreshListen()
 
         }
         return rootView
@@ -66,7 +68,7 @@ class HotShowFragment : Fragment(), IView.IHotShowView {
         llBack.visibility = View.INVISIBLE
         // 设置title
         tvTitle = rootView!!.find(R.id.tv_head_title)
-        tvTitle.text = "正在上映"
+        tvTitle.text = "热映"
         // refresh
         mRefreshLayout = rootView!!.find(R.id.refreshLayout)
         // 设置RecyclerView
@@ -105,16 +107,41 @@ class HotShowFragment : Fragment(), IView.IHotShowView {
     private fun refreshListen() {
         // refresh
         mRefreshLayout.setOnRefreshListener {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            mRefreshLayout.layout.postDelayed({
+                type=1
+                start = 0
+                mHotShowPresenter.getData(type, start)
+            }, 2000)
         }
 
         // loadmore
-        mRefreshLayout.setOnLoadMoreListener(object : OnLoadMoreListener {
-            override fun onLoadMore(refreshLayout: RefreshLayout) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
+        mRefreshLayout.setOnLoadMoreListener {
+            mRefreshLayout.layout.postDelayed({
+                type = 2
+                start += Constant.PAGE_COUNT
+                mHotShowPresenter.getData(type, start)
+            }, 2000)
+        }
+    }
 
-        })
+    /**
+     * refresh
+     */
+    override fun onRefresh(mDataList: List<HotShowBean.SubjectsBean>) {
+        mHotShowAdapter.setNewData(mDataList)
+        mRefreshLayout.finishRefresh()
+        mRefreshLayout.setNoMoreData(false)
+    }
+
+    /**
+     * loadMore
+     */
+    override fun onLoadMore(mDataList: List<HotShowBean.SubjectsBean>) {
+        mHotShowAdapter.addData(mDataList)
+        if (mDataList.size<Constant.PAGE_COUNT){
+            mRefreshLayout.finishLoadMoreWithNoMoreData()
+        }
+        mRefreshLayout.finishLoadMore()
     }
 
 

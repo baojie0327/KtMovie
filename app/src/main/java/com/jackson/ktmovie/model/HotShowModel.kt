@@ -18,10 +18,12 @@ import io.reactivex.schedulers.Schedulers
  * @version 1.0.0
  * since 2018 07 02
  */
-class HotShowModel : IModel.IHotShowModel {
+class HotShowModel(private var mJsNetworkService: JsNetworkService) : IModel.IHotShowModel {
+
+   // private  var mJsNetworkService:JsNetworkService=jsNetworkService
 
     override fun getData(paraMap: MutableMap<String, String>, callBack: MyCallBack<HotShowBean>) =
-            JsNetworkService.instance.mINetworkService
+            mJsNetworkService.getINetworkService()
                     .getHotShowData(paraMap)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

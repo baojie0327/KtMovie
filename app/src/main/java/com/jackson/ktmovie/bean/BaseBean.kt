@@ -13,12 +13,16 @@ import java.io.Serializable
  * since 2018 07 02
  */
 open class BaseBean<T> : Serializable {
-     var code: String = ""
-     var msg: String = ""
-     var request: String = ""
-     var count: Int = 0
-     var start: Int = 0
-     var total: Int = 0
-     var title: String? = null
-     var subjects: MutableList<T>? = null
+
+    // Moive
+    var code: String = ""
+    var msg: String = ""
+    var request: String = ""
+    var count: Int = 0
+    var start: Int = 0
+    var total: Int = 0
+    var title: String? = null
+    var subjects: MutableList<T>? = null
+    var data: List<T>? = null
+
 }

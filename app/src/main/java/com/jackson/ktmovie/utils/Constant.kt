@@ -15,6 +15,11 @@ object Constant {
     var LOG_DEBUG = true //控制工程的log信息打印
 
     val baseUrl = "https://api.douban.com/"
+    val baseUrlJD = "https://yaoser.jd.com"
 
+    val PAGE_COUNT = 5
+
+
+    val typeBanner = 1         //轮播图
 
 }

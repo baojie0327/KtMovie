@@ -1,10 +1,9 @@
 package com.jackson.ktmovie.apiservice
 
+import com.jackson.ktmovie.bean.HomeBean
 import com.jackson.ktmovie.bean.HotShowBean
-import com.jackson.ktmovie.utils.Constant
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.QueryMap
+import retrofit2.http.*
 
 /**
  * JsNetworkService  2018-06-29
@@ -16,7 +15,7 @@ import retrofit2.http.QueryMap
  * @version 1.0.0
  * since 2018 06 29
  */
-class JsNetworkService private constructor(retrofitClient: RetrofitClient) {
+class JsNetworkService (retrofitClient: RetrofitClient) {
 
     var mINetworkService: INetworkService
 
@@ -27,15 +26,23 @@ class JsNetworkService private constructor(retrofitClient: RetrofitClient) {
     /**
      * 单例模式获取实例
      */
-    companion object {
+   /* companion object {
         val instance = JsNetworkService(RetrofitClient(Constant.baseUrl))
-    }
+    }*/
+    fun getINetworkService():INetworkService = mINetworkService
 
 
     /**
      * 网络请求服务接口
      */
     interface INetworkService {
+
+        /**
+         * 首页
+         */
+        @POST("home/content")
+        @FormUrlEncoded
+        fun getHomeData(@FieldMap parmMap: Map<String, String>): Observable<HomeBean>
         /**
          * 热映
          */

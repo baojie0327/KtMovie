@@ -1,6 +1,7 @@
 package com.jackson.ktmovie.model
 
 import com.jackson.ktmovie.apiservice.MyCallBack
+import com.jackson.ktmovie.bean.HomeBean
 import com.jackson.ktmovie.bean.HotShowBean
 import retrofit2.http.QueryMap
 
@@ -16,13 +17,16 @@ import retrofit2.http.QueryMap
  */
 class IModel {
 
+    interface IHomeModel {
+        fun getData(@QueryMap paraMap: Map<String, String>, callBack: MyCallBack<HomeBean>)
+    }
+
     /**
      * 热映
      */
     interface IHotShowModel {
         fun getData(@QueryMap paraMap: MutableMap<String, String>, callBack: MyCallBack<HotShowBean>)
     }
-
 
 
 }
