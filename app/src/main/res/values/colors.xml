@@ -10,4 +10,11 @@
     <color name="main_color">#00BD30</color>
     <color name="icon_color">#8C8C8C</color>
     <color name="background_gray_color">#f7f7f7</color>
+    <color name="red">#FF0000</color>
+    <color name="orange">#FF6100</color>
+
+
+    <color name="light_gray">#b3b3b3</color>
+    <color name="text_black_color">#323232</color>
+    <color name="general_gray">#f7f7f7</color>
 </resources>

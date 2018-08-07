@@ -21,9 +21,14 @@ import com.chad.library.adapter.base.BaseViewHolder
  * @version 1.0.0
  * since 2018 07 19
  */
-abstract class BaseDelegateAdapter<in T, K : BaseViewHolder>
-(protected var mContext: Context, private val mDataList: List<T>,
- private val mLayoutHelper: LayoutHelper, private var mLayoutId: Int,private var mCount: Int,private var mViewTypeItem: Int) : DelegateAdapter.Adapter<K>() {
+abstract class BaseDelegateAdapter<T, K : BaseViewHolder>() : DelegateAdapter.Adapter<K>() {
+
+    var mContext: Context? = null
+    var mDataList: List<T>? = null
+    var mLayoutHelper: LayoutHelper? = null
+    var mCount: Int = -1
+    var mLayoutId: Int = -1
+    var mViewTypeItem: Int = -1
 
     protected var mOnItemClickListener: OnItemClickListener? = null   // item点击监听
     protected var mOnItemChildClickListener: OnItemChildClickListener? = null // child item 点击监听
@@ -32,14 +37,14 @@ abstract class BaseDelegateAdapter<in T, K : BaseViewHolder>
     /**
      * 构造方法
      */
-   /* constructor(context: Context, list: List<T>, layoutHelper: LayoutHelper, layoutId: Int, count: Int, viewTypeItem: Int) : this() {
+    constructor(context: Context, list: List<T>, layoutHelper: LayoutHelper, layoutId: Int, count: Int, viewTypeItem: Int) : this() {
         this.mContext = context
         this.mDataList = list
         this.mLayoutHelper = layoutHelper
         this.mLayoutId = layoutId
         this.mCount = count
         this.mViewTypeItem = viewTypeItem
-    }*/
+    }
 
     override fun onCreateLayoutHelper(): LayoutHelper? = mLayoutHelper
 

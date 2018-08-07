@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
-import android.widget.FrameLayout
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.ashokvarma.bottomnavigation.ShapeBadgeItem
@@ -15,13 +14,13 @@ import com.jackson.ktmovie.view.fragment.HomeFragment
 import com.jackson.ktmovie.view.fragment.HotShowFragment
 import com.jackson.ktmovie.view.fragment.MineFragment
 import com.jackson.ktmovie.view.fragment.RankListFragment
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationBar.OnTabSelectedListener {
 
 
-    private lateinit var mflContent: FrameLayout    //布局
-    private lateinit var mBottomNavigationBar: BottomNavigationBar  //BottomBar控件
+  //  private lateinit var mflContent: FrameLayout    //布局
+  //  private lateinit var mBottomNavigationBar: BottomNavigationBar  //BottomBar控件
     private lateinit var mTextBadgeItem: TextBadgeItem //  item提示文字
     private lateinit var mShapeBadgeItem: ShapeBadgeItem //item提示小圆点
     private var lastSelectedPosition: Int = 0
@@ -50,13 +49,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, BottomNavigation
      */
     private fun initView() {
         // 初始化控件
-        mflContent = find(R.id.ll_content)
-        mBottomNavigationBar = find(R.id.bottom_navigation_bar)
+    //    mflContent = find(R.id.ll_content)
+    //    mBottomNavigationBar = find(R.id.bottom_navigation_bar)
         // TODO设置模式
-        mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED)
+        bottom_navigation_bar.setMode(BottomNavigationBar.MODE_FIXED)
         // TODO设置背景色样式
-        mBottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
-        mBottomNavigationBar.setBarBackgroundColor(R.color.background_gray_color)
+        bottom_navigation_bar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC)
+        bottom_navigation_bar.setBarBackgroundColor(R.color.background_gray_color)
 
         // 设置item提示文字
         mTextBadgeItem = TextBadgeItem()
@@ -79,7 +78,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, BottomNavigation
                 .setGravity(Gravity.TOP or Gravity.END)
                 .setHideOnSelect(false)
 
-        mBottomNavigationBar.addItem(BottomNavigationItem(R.mipmap.tab_home_pressed, "首页").setActiveColorResource(R.color.main_color).setInactiveIconResource(R.mipmap.tab_home_normal).setInActiveColorResource(R.color.icon_color))
+        bottom_navigation_bar.addItem(BottomNavigationItem(R.mipmap.tab_home_pressed, "首页").setActiveColorResource(R.color.main_color).setInactiveIconResource(R.mipmap.tab_home_normal).setInActiveColorResource(R.color.icon_color))
                 .addItem(BottomNavigationItem(R.mipmap.tab_hotshow, "热映").setActiveColorResource(R.color.main_color).setInactiveIconResource(R.mipmap.tab_hotshow_off).setInActiveColorResource(R.color.icon_color))
                 .addItem(BottomNavigationItem(R.mipmap.tab_ranklist_check, "排行").setActiveColorResource(R.color.main_color).setInactiveIconResource(R.mipmap.tab_ranklist_normal).setInActiveColorResource(R.color.icon_color).setBadgeItem(mShapeBadgeItem))
                 .addItem(BottomNavigationItem(R.mipmap.tab_mine_pressed, "我的").setActiveColorResource(R.color.main_color).setInactiveIconResource(R.mipmap.tab_mine_normal).setInActiveColorResource(R.color.icon_color).setBadgeItem(mTextBadgeItem))
@@ -87,7 +86,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, BottomNavigation
                 .initialise()
 
         // tab切换监听
-        mBottomNavigationBar.setTabSelectedListener(this)
+        bottom_navigation_bar.setTabSelectedListener(this)
 
     }
 

@@ -1,23 +1,17 @@
 package com.jackson.ktmovie.utils
 
+
 import android.content.Context
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.view.Gravity
-import android.view.View
 import android.widget.Toast
 import com.jackson.ktmovie.R
-
-
 import java.io.UnsupportedEncodingException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.regex.Matcher
+import java.util.*
 import java.util.regex.Pattern
 
 /*
@@ -110,12 +104,7 @@ object CommonMethod {
     fun isWeixinAvilible(context: Context): Boolean {
         val packageManager = context.packageManager// 获取packagemanager
         val pinfo = packageManager.getInstalledPackages(0)// 获取所有已安装程序的包信息
-        if (pinfo != null) {
-            pinfo.indices
-                    .map { pinfo[it].packageName }
-                    .filter { it == "com.tencent.mm" }
-                    .forEach { return true }
-        }
+        pinfo?.indices?.map { pinfo[it].packageName }?.filter { it == "com.tencent.mm" }?.forEach { return true }
 
         return false
     }
@@ -129,14 +118,7 @@ object CommonMethod {
     fun isQQClientAvailable(context: Context): Boolean {
         val packageManager = context.packageManager
         val pinfo = packageManager.getInstalledPackages(0)
-        if (pinfo != null) {
-            for (i in pinfo.indices) {
-                val pn = pinfo[i].packageName
-                if (pn == "com.tencent.mobileqq") {
-                    return true
-                }
-            }
-        }
+        pinfo?.indices?.map { pinfo[it].packageName }?.filter { it == "com.tencent.mobileqq" }?.forEach { return true }
         return false
     }
 

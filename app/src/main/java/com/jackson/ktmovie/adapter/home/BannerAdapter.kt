@@ -21,18 +21,20 @@ import com.youth.banner.Banner
  * @version 1.0.0
  * since 2018 08 06
  */
-class BannerAdapter(mContext: Context, mDataList: List<String>, mLayoutHelper: LayoutHelper, mLayoutId: Int, mCount: Int, mViewTypeItem: Int) : BaseDelegateAdapter<String, BaseViewHolder>(mContext,mDataList,mLayoutHelper,mLayoutId,mCount,mViewTypeItem) {
+class BannerAdapter : BaseDelegateAdapter<String, BaseViewHolder> {
+
 
     private var imgUrlList: List<String> = arrayListOf()
-    init {
+
+    /**
+     * 构造函数
+     */
+    constructor(mContext: Context, mDataList: List<String>, mLayoutHelper: LayoutHelper, mLayoutId: Int, mCount: Int, mViewTypeItem: Int) : super(mContext, mDataList, mLayoutHelper, mLayoutId, mCount, mViewTypeItem) {
         imgUrlList = mDataList
     }
-   /* constructor(mContext: Context, mDataList: List<String>, mLayoutHelper: LayoutHelper, mLayoutId: Int, mCount: Int, mViewTypeItem: Int) : super() {
-        imgUrlList = mDataList
-    }*/
 
-    override fun convert(helper: BaseViewHolder, item: String?, position: Int) {
-        var mBanner: Banner = helper.getView(R.id.banner)
+    override fun convert(helper: BaseViewHolder, item: String?, pos: Int) {
+        var mBanner: Banner = helper.getView<Banner>(R.id.banner)
         // 设置图片加载器
         mBanner.setImageLoader(GlideImageLoader())
         var layoutParams: LinearLayout.LayoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -40,6 +42,9 @@ class BannerAdapter(mContext: Context, mDataList: List<String>, mLayoutHelper: L
         mBanner.layoutParams = layoutParams
         mBanner.setImages(imgUrlList)
         mBanner.start()
+        // 监听
+        mBanner.setOnBannerListener { position -> mOnItemClickListener!!.onItemClick(helper.itemView, position) }
+
     }
 
 
