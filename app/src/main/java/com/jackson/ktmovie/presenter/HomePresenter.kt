@@ -33,11 +33,11 @@ class HomePresenter(iHomeView: IView.IHomeView) {
 
     private fun inject() =
             DaggerHomeComponent.builder()
-            .homeModule(HomeModule())
-            .build()
-            .inject(this)
+                    .homeModule(HomeModule())
+                    .build()
+                    .inject(this)
 
-    fun getData() {
+    fun getData(type: Int) {
         // 参数
         var paraMap: MutableMap<String, String> = mutableMapOf()
         paraMap.put("phoneNumber", "18310083556")
@@ -51,7 +51,11 @@ class HomePresenter(iHomeView: IView.IHomeView) {
         mIHomeModel.getData(paraMap, object : MyCallBack<HomeBean> {
             override fun onSuccess(response: HomeBean) {
                 if (response.code == "1") {
-                    mIHomeView!!.setData(response.data!!)
+                    when (type) {
+                        0 -> mIHomeView!!.setData(response.data!!)
+                        1-> mIHomeView!!.onRefresh(response.data!!)
+                    }
+
                 }
             }
 
