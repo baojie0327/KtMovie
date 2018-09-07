@@ -1,5 +1,6 @@
 package com.jackson.ktmovie.view.fragment
 
+
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -47,7 +48,7 @@ class HotShowFragment : Fragment(), IView.IHotShowView {
     @Inject
     lateinit var mHotShowPresenter: HotShowPresenter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (rootView == null) {
             rootView = inflater!!.inflate(R.layout.fragment_hotshow_layout, null)
             inject()

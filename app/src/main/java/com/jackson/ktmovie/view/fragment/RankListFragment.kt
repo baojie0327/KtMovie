@@ -21,7 +21,7 @@ class RankListFragment : Fragment() {
 
     private var rootView: View? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (rootView == null) {
             rootView = inflater!!.inflate(R.layout.fragment_ranklist_layout, null)
         }

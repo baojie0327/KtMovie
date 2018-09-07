@@ -17,7 +17,7 @@ import javax.inject.Singleton
  * since 2018 07 02
  */
 @Singleton
-@Component(modules = arrayOf(HotShowModule::class))
+@Component(modules = [(HotShowModule::class)])
 interface HotShowComponent {
     fun inject(hotShowFragment: HotShowFragment)
     fun inject(hotShowPresenter: HotShowPresenter)

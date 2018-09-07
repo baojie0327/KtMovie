@@ -17,7 +17,7 @@ import javax.inject.Singleton
  * since 2018 07 02
  */
 @Singleton
-@Component(modules = arrayOf(HomeModule::class))
+@Component(modules = [(HomeModule::class)])
 interface HomeComponent {
     fun inject(homeFragment: HomeFragment)
     fun inject(homePresenter: HomePresenter)

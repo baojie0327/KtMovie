@@ -1,5 +1,6 @@
 package com.jackson.ktmovie.view.fragment
 
+
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -73,7 +74,7 @@ class HomeFragment : Fragment(), IView.IHomeView {
     lateinit var mHomePresenter: HomePresenter
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (rootView == null) {
             rootView = inflater!!.inflate(R.layout.fragment_home_layout, null)
             inject();
@@ -133,7 +134,7 @@ class HomeFragment : Fragment(), IView.IHomeView {
     private fun initData() {
         //初始化
         //创建VirtualLayoutManager对象
-        val layoutManager = VirtualLayoutManager(activity)
+        val layoutManager = VirtualLayoutManager(context!!)
         layoutManager.setRecycleOffset(5000)
         // 将VirtualLayoutManager绑定到recyclerView
         mRecyclerView.layoutManager = layoutManager
@@ -202,10 +203,10 @@ class HomeFragment : Fragment(), IView.IHomeView {
         val singleLayoutHelper: SingleLayoutHelper = SingleLayoutHelper()
         var imgList: MutableList<String> = mutableListOf()
         items.indices.mapTo(imgList) { "http:" + items[it].img }
-        mBannerAdapter = BannerAdapter(activity, imgList, singleLayoutHelper, R.layout.item_home_banner_layout, 1, Constant.typeBanner)
+        mBannerAdapter = BannerAdapter(context!!, imgList, singleLayoutHelper, R.layout.item_home_banner_layout, 1, Constant.typeBanner)
         mBannerAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
 
         })
@@ -227,17 +228,17 @@ class HomeFragment : Fragment(), IView.IHomeView {
         gridLayoutHelper.setAutoExpand(false)//是否自动填充空白区域
         //   gridLayoutHelper.setSpanCount(3);// 设置每行多少个网格
         gridLayoutHelper.bgColor = Color.WHITE // 设置背景颜色
-        mGridMenuAdapter = GridMenuAdapter(activity, items, gridLayoutHelper, R.layout.item_home_gridmenu_layout, items.size, Constant.typeGvidMenu)
+        mGridMenuAdapter = GridMenuAdapter(context!!, items, gridLayoutHelper, R.layout.item_home_gridmenu_layout, items.size, Constant.typeGvidMenu)
         // 监听
         mGridMenuAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
         })
 
         mGridMenuAdapter.setOnItemChildClickListener(object : BaseDelegateAdapter.OnItemChildClickListener {
             override fun onItemChildClick(view: View, position: Int) {
                 when (view.id) {
-                    R.id.img_grid_menu -> CommonMethod.showToast(activity, "click-child-" + position, false)
+                    R.id.img_grid_menu -> CommonMethod.showToast(context!!, "click-child-" + position, false)
                 }
             }
 
@@ -253,10 +254,10 @@ class HomeFragment : Fragment(), IView.IHomeView {
         val linearLayoutHelper: LinearLayoutHelper = LinearLayoutHelper()
         var infoList: MutableList<String> = mutableListOf()
         items.indices.mapTo(infoList) { items[it].title!! }
-        mMarqueeAdapter = MarqueeAdapter(activity, infoList, linearLayoutHelper, R.layout.item_home_marquee_layout, 1, Constant.typeMarquee)
+        mMarqueeAdapter = MarqueeAdapter(context!!, infoList, linearLayoutHelper, R.layout.item_home_marquee_layout, 1, Constant.typeMarquee)
         mMarqueeAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
         })
     }
@@ -284,10 +285,10 @@ class HomeFragment : Fragment(), IView.IHomeView {
             }
         })
 
-        mGridMenuSpanAdapter = GridMenuSpanAdapter(activity, items, gridLayoutHelper, R.layout.item_home_gridspan_layout, items.size, Constant.typeHot)
+        mGridMenuSpanAdapter = GridMenuSpanAdapter(context!!, items, gridLayoutHelper, R.layout.item_home_gridspan_layout, items.size, Constant.typeHot)
         mGridMenuSpanAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
         })
 
@@ -298,11 +299,11 @@ class HomeFragment : Fragment(), IView.IHomeView {
      */
     private fun setHorizon(items: List<HomeBean.DataBean.ItemsBean>) {
         val singleLayoutHelper = SingleLayoutHelper()
-        mHorizontalAdapter = HorizontalAdapter(activity, items, singleLayoutHelper, R.layout.item_home_horizon_layout, 1, Constant.typePrepare)
+        mHorizontalAdapter = HorizontalAdapter(context!!, items, singleLayoutHelper, R.layout.item_home_horizon_layout, 1, Constant.typePrepare)
         // 监听
         mHorizontalAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
         })
     }
@@ -326,7 +327,7 @@ class HomeFragment : Fragment(), IView.IHomeView {
 
         stickyLayoutHelper.setOffset(100)// 设置吸边位置的偏移量
         val list = ArrayList<String>()
-        mStickyAdapter = StickyAdapter(activity, list, stickyLayoutHelper, R.layout.item_home_sticky_layout, 1, Constant.typeSticky)
+        mStickyAdapter = StickyAdapter(context!!, list, stickyLayoutHelper, R.layout.item_home_sticky_layout, 1, Constant.typeSticky)
 
     }
 
@@ -339,19 +340,19 @@ class HomeFragment : Fragment(), IView.IHomeView {
         linearLayoutHelper.setDividerHeight(5)
         linearLayoutHelper.setMargin(0, 0, 0, 0)
         linearLayoutHelper.setPadding(0, 0, 0, 10)
-        mLinearAdapter = LinearAdapter(activity, items, linearLayoutHelper, R.layout.item__home_linear_layout, items.size, Constant.typeChoice)
+        mLinearAdapter = LinearAdapter(context!!, items, linearLayoutHelper, R.layout.item__home_linear_layout, items.size, Constant.typeChoice)
         // 监听
         mLinearAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
         })
 
         mLinearAdapter.setOnItemChildClickListener(object : BaseDelegateAdapter.OnItemChildClickListener {
             override fun onItemChildClick(view: View, position: Int) {
                 when (view.id) {
-                    R.id.img_choice_menu -> CommonMethod.showToast(activity, "click-image-" + position, false)
-                    R.id.tv_choice_name -> CommonMethod.showToast(activity, "click-text-" + position, false)
+                    R.id.img_choice_menu -> CommonMethod.showToast(context!!, "click-image-" + position, false)
+                    R.id.tv_choice_name -> CommonMethod.showToast(context!!, "click-text-" + position, false)
                 }
             }
         })
@@ -369,10 +370,10 @@ class HomeFragment : Fragment(), IView.IHomeView {
         fixLayoutHelper.setX(10)// 设置基准位置的横向偏移量X
         fixLayoutHelper.setY(10)// 设置基准位置的纵向偏移量Y
         val list = ArrayList<String>()
-        mFixAdapter = FixAdapter(activity, list, fixLayoutHelper, R.layout.item_home_fix_layout, 1, Constant.typeFix)
+        mFixAdapter = FixAdapter(context!!, list, fixLayoutHelper, R.layout.item_home_fix_layout, 1, Constant.typeFix)
         mFixAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
 
         })
@@ -390,10 +391,10 @@ class HomeFragment : Fragment(), IView.IHomeView {
         floatLayoutHelper.setDefaultLocation(300, 300)// 设置布局里Item的初始位置
 
         val list = ArrayList<String>()
-        mFloatAdapter = FloatAdapter(activity, list, floatLayoutHelper, R.layout.item_home_float_layout, 1, Constant.typeFloat)
+        mFloatAdapter = FloatAdapter(context!!, list, floatLayoutHelper, R.layout.item_home_float_layout, 1, Constant.typeFloat)
         mFloatAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
 
         })
@@ -411,10 +412,10 @@ class HomeFragment : Fragment(), IView.IHomeView {
         columnLayoutHelper.paddingBottom = 10
         // columnLayoutHelper特有属性
         columnLayoutHelper.setWeights(floatArrayOf(40f, java.lang.Float.NaN, 40f))// 设置该行每个Item占该行总宽度的比例
-        mColumnAdapter = ColumnAdapter(activity, items, columnLayoutHelper, R.layout.item_home_column_layout, 3, Constant.typeColumn)
+        mColumnAdapter = ColumnAdapter(context!!, items, columnLayoutHelper, R.layout.item_home_column_layout, 3, Constant.typeColumn)
         mColumnAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
 
         })
@@ -431,10 +432,10 @@ class HomeFragment : Fragment(), IView.IHomeView {
         //  onePlusNLayoutHelper.setBgColor(Color.GRAY);// 设置背景颜色
         // onePlusNLayoutHelper.setColWeights(new float[]{40f, 50f, 50f});
         onePlusNLayoutHelper.aspectRatio = 2f// 设置设置布局内每行布局的宽与高的比
-        mOnePlusNAdapter = OnePlusNAdapter(activity, items, onePlusNLayoutHelper, R.layout.item_home_oneplusn_layout, 3, Constant.typeOnePlusN)
+        mOnePlusNAdapter = OnePlusNAdapter(context!!, items, onePlusNLayoutHelper, R.layout.item_home_oneplusn_layout, 3, Constant.typeOnePlusN)
         mOnePlusNAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
         })
     }
@@ -458,10 +459,10 @@ class HomeFragment : Fragment(), IView.IHomeView {
         scrollFixLayoutHelper.showType = ScrollFixLayoutHelper.SHOW_ON_LEAVE// 设置Item的显示模式
 
         val list: List<String> = arrayListOf()
-        mScrollFixAdapter = ScrollFixAdapter(activity, list, scrollFixLayoutHelper, R.layout.item_home_fix_layout, 1, Constant.typeScrollFix)
+        mScrollFixAdapter = ScrollFixAdapter(context!!, list, scrollFixLayoutHelper, R.layout.item_home_fix_layout, 1, Constant.typeScrollFix)
         mScrollFixAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
 
         })
@@ -480,10 +481,10 @@ class HomeFragment : Fragment(), IView.IHomeView {
         staggeredGridLayoutHelper.lane = 2// 设置控制瀑布流每行的Item数
         //  staggeredGridLayoutHelper.setHGap(10);// 设置子元素之间的水平间距
         //  staggeredGridLayoutHelper.setVGap(15);// 设置子元素之间的垂直间距
-        mStaggeredAdapter = StaggeredAdapter(activity, items, staggeredGridLayoutHelper, R.layout.item_home_staggered_layout, items.size, Constant.typeStaggered)
+        mStaggeredAdapter = StaggeredAdapter(context!!, items, staggeredGridLayoutHelper, R.layout.item_home_staggered_layout, items.size, Constant.typeStaggered)
         mStaggeredAdapter.setOnItemClickListener(object : BaseDelegateAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) =
-                    CommonMethod.showToast(activity, "click--" + position, false)
+                    CommonMethod.showToast(context!!, "click--" + position, false)
 
 
         })

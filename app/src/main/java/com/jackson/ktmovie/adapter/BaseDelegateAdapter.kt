@@ -48,11 +48,11 @@ abstract class BaseDelegateAdapter<T, K : BaseViewHolder>() : DelegateAdapter.Ad
 
     override fun onCreateLayoutHelper(): LayoutHelper? = mLayoutHelper
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): K? {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): K {
         if (viewType == mViewTypeItem) {
             return BaseViewHolder(LayoutInflater.from(mContext).inflate(mLayoutId, parent, false)) as K
         }
-        return null
+        return null as K
     }
 
     override fun onBindViewHolder(holder: K, position: Int) =
