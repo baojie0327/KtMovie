@@ -45,6 +45,7 @@ class HotShowPresenter(iIHotShowView: IView.IHotShowView) {
          } catch (e: Exception) {
          }*/
         val paraMap: MutableMap<String, String> = mutableMapOf()
+        paraMap.put("apikey", "0df993c66c0c636e29ecbb5344252a4a")
         paraMap.put("city", "北京")
         paraMap.put("start", start.toString())
         paraMap.put("count", Constant.PAGE_COUNT.toString())

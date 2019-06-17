@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.jackson.ktmovie">
+    package="com.jackson.ktmovie">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -14,18 +14,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".view.activity.kotlinbase.ClassUseActivity"></activity>
+        <activity android:name=".view.activity.kotlinbase.DemoKotlinActivity" />
+        <activity android:name=".view.activity.kotlinbase.BaseOneActivity" />
+        <activity android:name=".view.activity.kotlinbase.BaseKotlinUseActivity" />
+        <activity android:name=".view.activity.kotlinbase.KotlinBaseActivity" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ColorTranslucentTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.BaseActivity">
-        </activity>
+        <activity android:name=".view.activity.BaseActivity" />
     </application>
 
 </manifest>
