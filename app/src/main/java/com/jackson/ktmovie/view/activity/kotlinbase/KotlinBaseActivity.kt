@@ -20,6 +20,8 @@ class KotlinBaseActivity : AppCompatActivity(), View.OnClickListener {
 
         base_use_one.setOnClickListener(this)
         base_use_class.setOnClickListener(this)
+        base_use_function.setOnClickListener(this)
+        base_use_array.setOnClickListener(this)
 
 
     }
@@ -29,6 +31,8 @@ class KotlinBaseActivity : AppCompatActivity(), View.OnClickListener {
             when (v.id) {
                 R.id.base_use_one -> startActivity<BaseOneActivity>()
                 R.id.base_use_class->startActivity<ClassUseActivity>()
+                R.id.base_use_function->startActivity<BaseUseFunctionActivity>()
+                R.id.base_use_array->startActivity<UseArrayActivity>()
             }
         }
     }

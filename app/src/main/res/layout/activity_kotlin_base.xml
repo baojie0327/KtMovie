@@ -29,6 +29,28 @@
         android:textSize="16sp"
         android:text="kotlin Class"/>
 
+    <TextView
+        android:id="@+id/base_use_function"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/main_color"
+        android:textColor="@color/white"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="kotlin函数"/>
+
+    <TextView
+        android:id="@+id/base_use_array"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/main_color"
+        android:textColor="@color/white"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="kotlin数组和集合"/>
+
 
 
 </LinearLayout>
