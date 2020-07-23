@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.ConstraintLayoutActivity">
+
+    <TextView
+        android:id="@+id/tv_hello"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="hello"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_world"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="world"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_hello"
+        app:layout_constraintLeft_toRightOf="@+id/tv_hello" />
+
+    <TextView
+        android:id="@+id/tv_java"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="java"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_goneMarginLeft="20dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_world"
+        app:layout_constraintTop_toTopOf="@+id/tv_world"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_hello"/>
+
+
+    <TextView
+        android:id="@+id/tv_android"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="android"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintVertical_bias="0.3"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_ios"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="ios"
+        app:layout_constraintCircle="@id/tv_android"
+        app:layout_constraintCircleRadius="130dp"
+        app:layout_constraintCircleAngle="135"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_js"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="js"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hello"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.jackson.ktmovie
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -10,11 +11,13 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.ashokvarma.bottomnavigation.ShapeBadgeItem
 import com.ashokvarma.bottomnavigation.TextBadgeItem
+
 import com.jackson.ktmovie.view.fragment.HomeFragment
 import com.jackson.ktmovie.view.fragment.HotShowFragment
 import com.jackson.ktmovie.view.fragment.MineFragment
 import com.jackson.ktmovie.view.fragment.RankListFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import java.net.URI
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, BottomNavigationBar.OnTabSelectedListener {
 

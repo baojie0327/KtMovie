@@ -35,31 +35,36 @@ class HotShowAdapter(layoutResId: Int, data: MutableList<HotShowBean.SubjectsBea
         helper!!.setText(R.id.tv_director, "导演：" + item!!.directors!![0].name)
 
         // 主演
-        helper!!.setText(R.id.tv_leading_role, "主演：" + getActor(item.casts!!))
+        helper!!.setText(R.id.tv_leading_role, "主演：" + getActor(item.casts))
 
         // 看过
-        helper!!.setText(R.id.tv_has_see,formatLargeNum(item!!.collect_count)+"人看过")
+        helper!!.setText(R.id.tv_has_see, formatLargeNum(item!!.collect_count) + "人看过")
 
     }
 
     /**
      * 获取主演
      */
-    private fun getActor(acList: List<HotShowBean.SubjectsBean.Cast>): String {
-        var strBuilder = StringBuilder()
-        acList.forEach {
-            strBuilder.append(it.name + " / ")
+    private fun getActor(acList: List<HotShowBean.SubjectsBean.Cast>?): String {
+        return if (acList != null && acList.isNotEmpty()) {
+            var strBuilder = StringBuilder()
+            acList.forEach {
+                strBuilder.append(it.name + " / ")
+            }
+            strBuilder.delete(strBuilder.length - 2, strBuilder.length)
+            strBuilder.toString()
+        } else {
+            ""
         }
-        strBuilder.delete(strBuilder.length - 2, strBuilder.length)
-        return strBuilder.toString()
+
     }
 
     fun formatLargeNum(number: Int): String {
         var ns = number.toString()
-        if (ns.length<5){
+        if (ns.length < 5) {
             return ns
         }
-        val a=(number/10000f).toDouble()
+        val a = (number / 10000f).toDouble()
         val df = DecimalFormat(".0")
         return df.format(a) + "万"
     }

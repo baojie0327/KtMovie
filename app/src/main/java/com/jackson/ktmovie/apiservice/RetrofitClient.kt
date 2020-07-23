@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
@@ -61,7 +62,7 @@ class RetrofitClient(baseUrl: String) {
         var sslContext: SSLContext? = null
 
         try {
-            sslContext = SSLContext.getInstance("SSL")
+            sslContext = SSLContext.getInstance("TLS")
             sslContext.init(null, arrayOf<TrustManager>(xtm), SecureRandom())
         } catch (e: NoSuchAlgorithmException) {
             e.printStackTrace()
@@ -74,7 +75,7 @@ class RetrofitClient(baseUrl: String) {
         //创建okHttpClient
         var okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .sslSocketFactory(sslContext!!.socketFactory)
+                .sslSocketFactory(sslContext!!.socketFactory,xtm)
                 .hostnameVerifier(DO_NOT_VERIFY)
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .readTimeout(15, TimeUnit.SECONDS)
@@ -84,6 +85,7 @@ class RetrofitClient(baseUrl: String) {
         // 创建Retrofit2的实例，并设置BaseUrl和Gson转换
         mRetrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .addConverterFactory(ScalarsConverterFactory.create())  // 支持String
                 .addConverterFactory(GsonConverterFactory.create())  //设置 Json 转换器
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) //RxJava 适配器
                 .client(okHttpClient)

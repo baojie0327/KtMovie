@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.kotlinbase.UseArrayActivity"></activity>
+        <activity android:name=".view.activity.ConstraintLayoutActivity"></activity>
+        <activity android:name=".view.activity.kotlinbase.UseArrayActivity" />
         <activity android:name=".view.activity.kotlinbase.BaseUseFunctionActivity" />
         <activity android:name=".view.activity.kotlinbase.ClassUseActivity" />
         <activity android:name=".view.activity.kotlinbase.DemoKotlinActivity" />
